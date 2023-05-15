@@ -7,18 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E64046FABD0F0ECE535D921 /* Pods_nailsCenterAppNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDAB17CC874A4F915CBD568 /* Pods_nailsCenterAppNative.framework */; };
 		DE68977B2A127A1D001D38F7 /* nailsCenterAppNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68977A2A127A1D001D38F7 /* nailsCenterAppNativeApp.swift */; };
 		DE68977D2A127A1D001D38F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68977C2A127A1D001D38F7 /* ContentView.swift */; };
 		DE68977F2A127A1E001D38F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE68977E2A127A1E001D38F7 /* Assets.xcassets */; };
 		DE6897822A127A1E001D38F7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE6897812A127A1E001D38F7 /* Preview Assets.xcassets */; };
+		DE6897892A127F69001D38F7 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE6897882A127F69001D38F7 /* Metal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0AEEBD6B963D8874AD192E /* Pods-nailsCenterAppNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nailsCenterAppNative.release.xcconfig"; path = "Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative.release.xcconfig"; sourceTree = "<group>"; };
+		7D9BEDE367CCE105916AE4C9 /* Pods-nailsCenterAppNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nailsCenterAppNative.debug.xcconfig"; path = "Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative.debug.xcconfig"; sourceTree = "<group>"; };
 		DE6897772A127A1D001D38F7 /* nailsCenterAppNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nailsCenterAppNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE68977A2A127A1D001D38F7 /* nailsCenterAppNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nailsCenterAppNativeApp.swift; sourceTree = "<group>"; };
 		DE68977C2A127A1D001D38F7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DE68977E2A127A1E001D38F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE6897812A127A1E001D38F7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DE6897882A127F69001D38F7 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		DE68978A2A12808D001D38F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DEDAB17CC874A4F915CBD568 /* Pods_nailsCenterAppNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nailsCenterAppNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +33,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE6897892A127F69001D38F7 /* Metal.framework in Frameworks */,
+				7E64046FABD0F0ECE535D921 /* Pods_nailsCenterAppNative.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1428AD1127F1A6419FAA74ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE6897882A127F69001D38F7 /* Metal.framework */,
+				DEDAB17CC874A4F915CBD568 /* Pods_nailsCenterAppNative.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D374393BF5BCEB7C097645EC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7D9BEDE367CCE105916AE4C9 /* Pods-nailsCenterAppNative.debug.xcconfig */,
+				3F0AEEBD6B963D8874AD192E /* Pods-nailsCenterAppNative.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DE68976E2A127A1D001D38F7 = {
 			isa = PBXGroup;
 			children = (
 				DE6897792A127A1D001D38F7 /* nailsCenterAppNative */,
 				DE6897782A127A1D001D38F7 /* Products */,
+				D374393BF5BCEB7C097645EC /* Pods */,
+				1428AD1127F1A6419FAA74ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,6 +80,7 @@
 		DE6897792A127A1D001D38F7 /* nailsCenterAppNative */ = {
 			isa = PBXGroup;
 			children = (
+				DE68978A2A12808D001D38F7 /* Info.plist */,
 				DE68977A2A127A1D001D38F7 /* nailsCenterAppNativeApp.swift */,
 				DE68977C2A127A1D001D38F7 /* ContentView.swift */,
 				DE68977E2A127A1E001D38F7 /* Assets.xcassets */,
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE6897852A127A1E001D38F7 /* Build configuration list for PBXNativeTarget "nailsCenterAppNative" */;
 			buildPhases = (
+				1308C633DFE7C6E8B845A632 /* [CP] Check Pods Manifest.lock */,
 				DE6897732A127A1D001D38F7 /* Sources */,
 				DE6897742A127A1D001D38F7 /* Frameworks */,
 				DE6897752A127A1D001D38F7 /* Resources */,
+				42BB079F151239763685071B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +163,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1308C633DFE7C6E8B845A632 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nailsCenterAppNative-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42BB079F151239763685071B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DE6897732A127A1D001D38F7 /* Sources */ = {
@@ -261,6 +335,7 @@
 		};
 		DE6897862A127A1E001D38F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D9BEDE367CCE105916AE4C9 /* Pods-nailsCenterAppNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -270,9 +345,15 @@
 				DEVELOPMENT_TEAM = 3639WF4XZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nailsCenterAppNative/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "this app utilizes camera to apply lenses";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "this app needs location to locate lenses";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "requires mic to record camera actions";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "needs to store photos when clicking on save button";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "needs camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "armv7 arkit";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -282,14 +363,18 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gabrieleconte.nailsCenterAppNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		DE6897872A127A1E001D38F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F0AEEBD6B963D8874AD192E /* Pods-nailsCenterAppNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -299,9 +384,15 @@
 				DEVELOPMENT_TEAM = 3639WF4XZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nailsCenterAppNative/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "this app utilizes camera to apply lenses";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "this app needs location to locate lenses";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "requires mic to record camera actions";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "needs to store photos when clicking on save button";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "needs camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "armv7 arkit";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -311,9 +402,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gabrieleconte.nailsCenterAppNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
