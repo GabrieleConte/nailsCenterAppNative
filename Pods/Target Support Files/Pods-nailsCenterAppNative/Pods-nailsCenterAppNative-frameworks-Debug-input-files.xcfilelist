@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-nailsCenterAppNative/Pods-nailsCenterAppNative-frameworks.sh
+${BUILT_PRODUCTS_DIR}/SCSDKCameraKitReferenceSwiftUI/SCSDKCameraKitReferenceSwiftUI.framework
+${BUILT_PRODUCTS_DIR}/SCSDKCameraKitReferenceUI/SCSDKCameraKitReferenceUI.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/SCSDKCameraKit/SCSDKCameraKit.framework/SCSDKCameraKit
