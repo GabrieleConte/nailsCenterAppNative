@@ -337,6 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = nailsCenterAppNative/nailsCenterAppNative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nailsCenterAppNative/Preview Content\"";
@@ -344,6 +345,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nailsCenterAppNative/Info.plist;
+				INFOPLIST_KEY_MetalCaptureEnabled = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app utilizes camera to apply lenses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "this app needs location to locate lenses";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "requires mic to record camera actions";
@@ -376,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = nailsCenterAppNative/nailsCenterAppNative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nailsCenterAppNative/Preview Content\"";
@@ -383,6 +386,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nailsCenterAppNative/Info.plist;
+				INFOPLIST_KEY_MetalCaptureEnabled = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app utilizes camera to apply lenses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "this app needs location to locate lenses";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "requires mic to record camera actions";
