@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>SCCameraKitAPIToken</key>
-	<string></string>
-	<key>SCSDKCameraKitClientId</key>
-	<string></string>
+	<string>eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNjgxNjUzNTY2LCJzdWIiOiI0NjkyMzFmMy1hYTY4LTRkYzgtYmE2OC1lOTg5ZGY3MWIxZmV-U1RBR0lOR35iODk3N2MzMi02NzkwLTRkOWYtOTUyMC1iMGU0Nzc1YmExNmQifQ.CLk2Utb8AtBb3Yuz_mqm_7bxqH4WOfTNR7PdP2PUYxQ</string>
+	<key>SCCameraKitClientId</key>
+	<string>469231f3-aa68-4dc8-ba68-e989df71b1fe</string>
 </dict>
 </plist>

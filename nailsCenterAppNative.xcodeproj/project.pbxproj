@@ -24,7 +24,6 @@
 		DE68977E2A127A1E001D38F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE6897812A127A1E001D38F7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DE6897882A127F69001D38F7 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
-		DE68978A2A12808D001D38F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEDAB17CC874A4F915CBD568 /* Pods_nailsCenterAppNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nailsCenterAppNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,7 +79,6 @@
 		DE6897792A127A1D001D38F7 /* nailsCenterAppNative */ = {
 			isa = PBXGroup;
 			children = (
-				DE68978A2A12808D001D38F7 /* Info.plist */,
 				DE68977A2A127A1D001D38F7 /* nailsCenterAppNativeApp.swift */,
 				DE68977C2A127A1D001D38F7 /* ContentView.swift */,
 				DE68977E2A127A1E001D38F7 /* Assets.xcassets */,
