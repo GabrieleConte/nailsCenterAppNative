@@ -58,7 +58,7 @@ void main(void) {
 #ifdef FRAGMENT_SHADER
 void main(void) {
     highp float depth = texture2D(screenTexture, varTex0).r;
-    if (depth < 1.0) {
+    if (depth < 1.0 && inputProjectionMatrixTerms != currentProjectionMatrixTerms) {
         depth = depthScreenToViewSpace(depth, inputProjectionMatrixTerms);
         depth = depthViewToScreenSpace(depth, currentProjectionMatrixTerms);
     }

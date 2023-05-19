@@ -67,12 +67,13 @@ public class VideoPreviewViewController: PreviewViewController {
 
     // MARK: Action Overrides
 
-    override func openSnapchat() {
+    override public func openSnapchatPressed(_ sender: UIButton) {
         snapchatDelegate?.cameraKitViewController(self, openSnapchat: .video(videoUrl))
     }
 
-    override func sharePreview() {
+    override public func sharePreviewPressed(_ sender: UIButton) {
         let viewController = UIActivityViewController(activityItems: [videoUrl], applicationActivities: nil)
+        viewController.popoverPresentationController?.sourceView = sender
         viewController.completionWithItemsHandler = { [weak self] _, _, _, _ in
             guard
                 let strongSelf = self,
@@ -86,7 +87,7 @@ public class VideoPreviewViewController: PreviewViewController {
         present(viewController, animated: true, completion: nil)
     }
 
-    override func savePreview() {
+    override public func savePreviewPressed(_ sender: UIButton) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: self.videoUrl)
         }) { saved, error in
@@ -125,8 +126,8 @@ public class VideoPreviewViewController: PreviewViewController {
 
 // MARK: Video Player
 
-private extension VideoPreviewViewController {
-    func setupVideoPlayer() {
+extension VideoPreviewViewController {
+    private func setupVideoPlayer() {
         addChild(playerController)
         view.insertSubview(playerController.view, at: 0)
         playerController.didMove(toParent: self)

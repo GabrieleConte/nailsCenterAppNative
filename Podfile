@@ -6,7 +6,7 @@ target 'nailsCenterAppNative' do
   use_frameworks!
 
   # Pods for nailsCenterAppNative
-pod 'SCSDKCameraKit', '1.21.1'
-pod 'SCSDKCameraKitReferenceSwiftUI', '1.21.1'
-pod 'SCSDKCameraKitReferenceUI', '1.21.1'
+pod 'SCSDKCameraKit', '1.22.0'
+pod 'SCSDKCameraKitReferenceSwiftUI', '1.22.0'
+pod 'SCSDKCameraKitReferenceUI', '1.22.0'
 end

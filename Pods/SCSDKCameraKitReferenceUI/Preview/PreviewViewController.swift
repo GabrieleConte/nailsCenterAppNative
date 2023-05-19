@@ -86,15 +86,18 @@ public class PreviewViewController: UIViewController {
 
     // MARK: Overridable Actions
 
-    func openSnapchat() {
+    @objc
+    open func openSnapchatPressed(_ sender: UIButton) {
         fatalError("open Snapchat action has to be implemented by subclass")
     }
 
-    func savePreview() {
+    @objc
+    open func savePreviewPressed(_ sender: UIButton) {
         fatalError("save preview action has to be implemented by subclass")
     }
 
-    func sharePreview() {
+    @objc
+    open func sharePreviewPressed(_ sender: UIButton) {
         fatalError("share preview action has to be implemented by subclass")
     }
 }
@@ -124,7 +127,7 @@ extension PreviewViewController {
     private func setupBottomButtonBar() {
         snapchatButton.addTarget(self, action: #selector(openSnapchatPressed(_:)), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(savePreviewPressed(_:)), for: .touchUpInside)
-        shareButton.addTarget(self, action: #selector(sharePreviewPressed(_:)), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(savePreviewPressedWithAuthorization(_:)), for: .touchUpInside)
         view.addSubview(bottomButtonStackView)
         NSLayoutConstraint.activate([
             bottomButtonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
@@ -133,26 +136,15 @@ extension PreviewViewController {
     }
 
     @objc
-    private func openSnapchatPressed(_ sender: UIButton) {
-        openSnapchat()
-    }
-
-    @objc
-    private func savePreviewPressed(_ sender: UIButton) {
+    private func savePreviewPressedWithAuthorization(_ sender: UIButton) {
         guard PHPhotoLibrary.authorizationStatus() == .authorized else {
             PHPhotoLibrary.requestAuthorization { status in
                 guard status == .authorized else { return }
-                self.savePreview()
+                self.savePreviewPressed(sender)
             }
 
             return
         }
-
-        savePreview()
-    }
-
-    @objc
-    private func sharePreviewPressed(_ sender: UIButton) {
-        sharePreview()
+        savePreviewPressed(sender)
     }
 }

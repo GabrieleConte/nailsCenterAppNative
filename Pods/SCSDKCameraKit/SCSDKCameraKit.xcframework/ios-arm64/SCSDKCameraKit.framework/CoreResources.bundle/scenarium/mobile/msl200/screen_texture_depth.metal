@@ -240,16 +240,27 @@ float param_11=0.0;
 float4 l9_0=sc_SampleTextureBiasOrLevel(sc_set2.screenTexture,sc_set2.screenTextureSmpSC,param,param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,param_11);
 float4 l9_1=l9_0;
 float depth=l9_0.x;
-if (depth<1.0)
+float l9_2=depth;
+bool l9_3=l9_2<1.0;
+bool l9_4;
+if (l9_3)
+{
+l9_4=any((*sc_set2.UserUniforms).inputProjectionMatrixTerms!=(*sc_set2.UserUniforms).currentProjectionMatrixTerms);
+}
+else
+{
+l9_4=l9_3;
+}
+if (l9_4)
 {
 float param_12=depth;
 float2 param_13=(*sc_set2.UserUniforms).inputProjectionMatrixTerms;
-float l9_2=depthScreenToViewSpace(param_12,param_13);
-depth=l9_2;
+float l9_5=depthScreenToViewSpace(param_12,param_13);
+depth=l9_5;
 float param_14=depth;
 float2 param_15=(*sc_set2.UserUniforms).currentProjectionMatrixTerms;
-float l9_3=depthViewToScreenSpace(param_14,param_15);
-depth=l9_3;
+float l9_6=depthViewToScreenSpace(param_14,param_15);
+depth=l9_6;
 }
 float param_16=depth;
 sc_writeFragDepth(param_16,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);

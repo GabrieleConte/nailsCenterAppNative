@@ -129,15 +129,37 @@ using namespace metal;
 //float4 sc_ShadowTextureSize
 //float4 sc_ShadowTextureDims
 //float4 sc_ShadowTextureView
+//int receivesRayTracedReflections
 //float4 sc_RayTracedReflectionTextureSize
 //float4 sc_RayTracedReflectionTextureDims
 //float4 sc_RayTracedReflectionTextureView
+//int isProxyMode
 //float receiver_mask
 //float3 OriginNormalizationScale
 //float3 OriginNormalizationScaleInv
 //float3 OriginNormalizationOffset
+//int ray_siever
 //int instance_id
 //int lray_triangles_last
+//int noEarlyZ
+//int has_animated_pn
+//int emitter_stride
+//int proxy_offset_position
+//int proxy_offset_normal
+//int proxy_offset_tangent
+//int proxy_offset_color
+//int proxy_offset_texture0
+//int proxy_offset_texture1
+//int proxy_offset_texture2
+//int proxy_offset_texture3
+//int proxy_format_position
+//int proxy_format_normal
+//int proxy_format_tangent
+//int proxy_format_color
+//int proxy_format_texture0
+//int proxy_format_texture1
+//int proxy_format_texture2
+//int proxy_format_texture3
 //float4 z_rayDirectionsSize
 //float4 z_rayDirectionsDims
 //float4 z_rayDirectionsView
@@ -275,15 +297,37 @@ float4 sc_ScreenTextureView;
 float4 sc_ShadowTextureSize;
 float4 sc_ShadowTextureDims;
 float4 sc_ShadowTextureView;
+int receivesRayTracedReflections;
 float4 sc_RayTracedReflectionTextureSize;
 float4 sc_RayTracedReflectionTextureDims;
 float4 sc_RayTracedReflectionTextureView;
+int isProxyMode;
 float receiver_mask;
 float3 OriginNormalizationScale;
 float3 OriginNormalizationScaleInv;
 float3 OriginNormalizationOffset;
+int ray_siever;
 int instance_id;
 int lray_triangles_last;
+int noEarlyZ;
+int has_animated_pn;
+int emitter_stride;
+int proxy_offset_position;
+int proxy_offset_normal;
+int proxy_offset_tangent;
+int proxy_offset_color;
+int proxy_offset_texture0;
+int proxy_offset_texture1;
+int proxy_offset_texture2;
+int proxy_offset_texture3;
+int proxy_format_position;
+int proxy_format_normal;
+int proxy_format_tangent;
+int proxy_format_color;
+int proxy_format_texture0;
+int proxy_format_texture1;
+int proxy_format_texture2;
+int proxy_format_texture3;
 float4 z_rayDirectionsSize;
 float4 z_rayDirectionsDims;
 float4 z_rayDirectionsView;
@@ -443,18 +487,6 @@ float4 z_rayDirectionsView;
 #elif sc_ShaderComplexityAnalyzer==1
 #undef sc_ShaderComplexityAnalyzer
 #define sc_ShaderComplexityAnalyzer 1
-#endif
-#ifndef sc_ProxyMode
-#define sc_ProxyMode 0
-#elif sc_ProxyMode==1
-#undef sc_ProxyMode
-#define sc_ProxyMode 1
-#endif
-#ifndef sc_NoEarlyZ
-#define sc_NoEarlyZ 0
-#elif sc_NoEarlyZ==1
-#undef sc_NoEarlyZ
-#define sc_NoEarlyZ 1
 #endif
 #ifndef sc_DepthOnly
 #define sc_DepthOnly 0
@@ -633,11 +665,11 @@ float4 z_rayDirectionsView;
 #ifndef sc_LightEstimationSGCount
 #define sc_LightEstimationSGCount 0
 #endif
-#ifndef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 0
-#elif sc_ReceiveRayTracedReflections==1
-#undef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 1
+#ifndef sc_ProxyAlphaOne
+#define sc_ProxyAlphaOne 0
+#elif sc_ProxyAlphaOne==1
+#undef sc_ProxyAlphaOne
+#define sc_ProxyAlphaOne 1
 #endif
 struct layoutIndices_obj
 {
@@ -1289,6 +1321,10 @@ float2 param=uv;
 int param_1=sc_ShadowTextureGetStereoViewIndex();
 return sc_ShadowTextureSampleViewIndex(param,param_1,sc_sysIn,sc_sysOut,sc_set0,sc_set1);
 }
+bool ReceivesRayTracedReflections(thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).receivesRayTracedReflections!=0;
+}
 float2 sc_RayTracedReflectionTextureGetDims2D(thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
 return (*sc_set0.LibraryUniforms).sc_RayTracedReflectionTextureDims.xy;
@@ -1394,6 +1430,14 @@ float4 sc_RayTracedReflectionTextureSampleView(thread const float2& uv,thread sc
 float2 param=uv;
 int param_1=sc_RayTracedReflectionTextureGetStereoViewIndex();
 return sc_RayTracedReflectionTextureSampleViewIndex(param,param_1,sc_sysIn,sc_sysOut,sc_set0,sc_set1);
+}
+bool IsProxyMode(thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).isProxyMode!=0;
+}
+bool NoEarlyZ(thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).noEarlyZ!=0;
 }
 float2 z_rayDirectionsGetDims2D(thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
@@ -1638,15 +1682,37 @@ float4 sc_ScreenTextureView;
 float4 sc_ShadowTextureSize;
 float4 sc_ShadowTextureDims;
 float4 sc_ShadowTextureView;
+int receivesRayTracedReflections;
 float4 sc_RayTracedReflectionTextureSize;
 float4 sc_RayTracedReflectionTextureDims;
 float4 sc_RayTracedReflectionTextureView;
+int isProxyMode;
 float receiver_mask;
 float3 OriginNormalizationScale;
 float3 OriginNormalizationScaleInv;
 float3 OriginNormalizationOffset;
+int ray_siever;
 int instance_id;
 int lray_triangles_last;
+int noEarlyZ;
+int has_animated_pn;
+int emitter_stride;
+int proxy_offset_position;
+int proxy_offset_normal;
+int proxy_offset_tangent;
+int proxy_offset_color;
+int proxy_offset_texture0;
+int proxy_offset_texture1;
+int proxy_offset_texture2;
+int proxy_offset_texture3;
+int proxy_format_position;
+int proxy_format_normal;
+int proxy_format_tangent;
+int proxy_format_color;
+int proxy_format_texture0;
+int proxy_format_texture1;
+int proxy_format_texture2;
+int proxy_format_texture3;
 float4 z_rayDirectionsSize;
 float4 z_rayDirectionsDims;
 float4 z_rayDirectionsView;
@@ -1806,18 +1872,6 @@ float4 z_rayDirectionsView;
 #elif sc_ShaderComplexityAnalyzer==1
 #undef sc_ShaderComplexityAnalyzer
 #define sc_ShaderComplexityAnalyzer 1
-#endif
-#ifndef sc_ProxyMode
-#define sc_ProxyMode 0
-#elif sc_ProxyMode==1
-#undef sc_ProxyMode
-#define sc_ProxyMode 1
-#endif
-#ifndef sc_NoEarlyZ
-#define sc_NoEarlyZ 0
-#elif sc_NoEarlyZ==1
-#undef sc_NoEarlyZ
-#define sc_NoEarlyZ 1
 #endif
 #ifndef sc_DepthOnly
 #define sc_DepthOnly 0
@@ -1996,11 +2050,11 @@ float4 z_rayDirectionsView;
 #ifndef sc_LightEstimationSGCount
 #define sc_LightEstimationSGCount 0
 #endif
-#ifndef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 0
-#elif sc_ReceiveRayTracedReflections==1
-#undef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 1
+#ifndef sc_ProxyAlphaOne
+#define sc_ProxyAlphaOne 0
+#elif sc_ProxyAlphaOne==1
+#undef sc_ProxyAlphaOne
+#define sc_ProxyAlphaOne 1
 #endif
 struct layoutIndices_obj
 {
@@ -2571,6 +2625,10 @@ float2 param=uv;
 int param_1=sc_ShadowTextureGetStereoViewIndex(sc_sysIn,sc_set0,sc_set1);
 return sc_ShadowTextureSampleViewIndex(param,param_1,sc_sysIn,sc_set0,sc_set1);
 }
+bool ReceivesRayTracedReflections(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).receivesRayTracedReflections!=0;
+}
 float2 sc_RayTracedReflectionTextureGetDims2D(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
 return (*sc_set0.LibraryUniforms).sc_RayTracedReflectionTextureDims.xy;
@@ -2665,6 +2723,14 @@ float4 sc_RayTracedReflectionTextureSampleView(thread const float2& uv,thread sc
 float2 param=uv;
 int param_1=sc_RayTracedReflectionTextureGetStereoViewIndex(sc_sysIn,sc_set0,sc_set1);
 return sc_RayTracedReflectionTextureSampleViewIndex(param,param_1,sc_sysIn,sc_set0,sc_set1);
+}
+bool IsProxyMode(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).isProxyMode!=0;
+}
+bool NoEarlyZ(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
+{
+return (*sc_set0.LibraryUniforms).noEarlyZ!=0;
 }
 float2 z_rayDirectionsGetDims2D(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
@@ -2784,6 +2850,6 @@ return sc_GetViewScreenCoords(sc_sysIn,sc_set0,sc_set1);
 }
 bool sc_GetGlFrontFacing(thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
-return !sc_sysIn.gl_FrontFacing;
+return sc_sysIn.gl_FrontFacing;
 }
 } // FRAGMENT SHADER

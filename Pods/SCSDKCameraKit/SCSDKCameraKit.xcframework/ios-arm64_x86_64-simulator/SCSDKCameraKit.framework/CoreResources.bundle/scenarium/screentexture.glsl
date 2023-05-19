@@ -24,13 +24,6 @@ uniform mat3 screenTextureTransform;
 uniform mat3 meshTransform;
 #endif // #ifdef USE_MESH_TRANSFORM
 
-#ifdef USE_MIP_BIAS
-uniform float screenTextureBias;
-#else
-#define USE_MIP_BIAS 0
-#define screenTextureBias 0.0
-#endif
-
 #ifdef VERTEX_SHADER
 
 void main(void) {
@@ -77,7 +70,7 @@ void main(void) {
 #else // #ifdef SC_TEXTURE_EXTERNAL
 
     // NOTE SC_TEXTURE2DLOD_IS_SIMULATED is defined in "std_texture.glsl" when mip level sampling simulation is enabled.
-    #if defined(SC_TEXTURE2DLOD_IS_SIMULATED) && !USE_MIP_BIAS
+    #if defined(SC_TEXTURE2DLOD_IS_SIMULATED)
 
         //
         // This scope handles legacy use cases of "screentexture.glsl" and legacy devices.
@@ -88,20 +81,20 @@ void main(void) {
 
         vec4 screenTextureColor = sc_textureExternalOESLod(screenTexture, screenTextureSize.xy, varTex0, screenTextureLevel);
 
-    #else // #if defined(SC_TEXTURE2DLOD_IS_SIMULATED) && !USE_MIP_BIAS
+    #else // #if defined(SC_TEXTURE2DLOD_IS_SIMULATED)
 
         //
         // We can render in stereo mode or/and use stereo samplers,
         // only per-texture generated functions should be used in these cases.
         //
 
-        #if USE_MIP_BIAS || !defined(sc_CanUseTextureLod)
-            vec4 screenTextureColor = screenTextureSampleViewBias(varTex0, screenTextureBias);
-        #else // #if USE_MIP_BIAS || !defined(sc_CanUseTextureLod)
+        #if defined(sc_CanUseTextureLod)
             vec4 screenTextureColor = screenTextureSampleViewLevel(varTex0, screenTextureLevel);
-        #endif // #else // #if USE_MIP_BIAS || !defined(sc_CanUseTextureLod)
+        #else // defined(sc_CanUseTextureLod)
+            vec4 screenTextureColor = screenTextureSampleView(varTex0);
+        #endif // #else // #if defined(sc_CanUseTextureLod)
 
-    #endif // #else // #if defined(SC_TEXTURE2DLOD_IS_SIMULATED) && !USE_MIP_BIAS
+    #endif // #else // #if defined(SC_TEXTURE2DLOD_IS_SIMULATED)
 
 #endif // #else // #ifdef SC_TEXTURE_EXTERNAL
 

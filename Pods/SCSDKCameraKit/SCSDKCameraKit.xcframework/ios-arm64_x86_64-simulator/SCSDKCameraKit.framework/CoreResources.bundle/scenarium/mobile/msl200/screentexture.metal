@@ -59,12 +59,6 @@ float4 screenTextureBorderColor;
 #undef USE_MESH_TRANSFORM
 #define USE_MESH_TRANSFORM 1
 #endif
-#ifndef USE_MIP_BIAS
-#define USE_MIP_BIAS 0
-#elif USE_MIP_BIAS==1
-#undef USE_MIP_BIAS
-#define USE_MIP_BIAS 1
-#endif
 #ifndef SWAP_R_B_CHANNELS
 #define SWAP_R_B_CHANNELS 0
 #elif SWAP_R_B_CHANNELS==1
@@ -172,12 +166,6 @@ float4 screenTextureBorderColor;
 #ifndef screenTextureLayout
 #define screenTextureLayout 0
 #endif
-#ifndef USE_MIP_BIAS
-#define USE_MIP_BIAS 0
-#elif USE_MIP_BIAS==1
-#undef USE_MIP_BIAS
-#define USE_MIP_BIAS 1
-#endif
 #ifndef SWAP_R_B_CHANNELS
 #define SWAP_R_B_CHANNELS 0
 #elif SWAP_R_B_CHANNELS==1
@@ -259,22 +247,6 @@ float2 screenTextureGetDims2D(constant userUniformsObj& UserUniforms)
 {
 return UserUniforms.screenTextureDims.xy;
 }
-float4 screenTextureSampleViewIndexBias(thread const float2& uv,thread const int& viewIndex,thread const float& bias0,constant userUniformsObj& UserUniforms,thread texture2d<float> screenTexture,thread sampler screenTextureSmpSC)
-{
-float2 param=screenTextureGetDims2D(UserUniforms);
-float2 param_1=uv;
-int param_2=screenTextureLayout;
-int param_3=viewIndex;
-float param_4=bias0;
-return sc_SampleView(screenTexture,screenTextureSmpSC,param,param_1,param_2,param_3,param_4);
-}
-float4 screenTextureSampleViewBias(thread const float2& uv,thread const float& bias0,constant userUniformsObj& UserUniforms,thread texture2d<float> screenTexture,thread sampler screenTextureSmpSC,thread sc_SysIn& sc_sysIn,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
-{
-float2 param=uv;
-int param_1=screenTextureGetStereoViewIndex(sc_sysIn,sc_set0,sc_set1);
-float param_2=bias0;
-return screenTextureSampleViewIndexBias(param,param_1,param_2,UserUniforms,screenTexture,screenTextureSmpSC);
-}
 float4 screenTextureSampleViewIndexLevel(thread const float2& uv,thread const int& viewIndex,thread const float& level,constant userUniformsObj& UserUniforms,thread texture2d<float> screenTexture,thread sampler screenTextureSmpSC)
 {
 #if (sc_CanUseTextureLod)
@@ -304,37 +276,25 @@ fragment sc_FragOut main_frag(sc_FragIn sc_fragIn [[stage_in]],constant sc_Set0&
 sc_fragIn.sc_sysIn.gl_FragCoord=gl_FragCoord;
 sc_fragIn.sc_sysIn.gl_FrontFacing=gl_FrontFacing;
 sc_FragOut sc_fragOut={};
-float4 l9_0;
-#if (USE_MIP_BIAS)
-{
 float2 param=sc_fragIn.sc_sysIn.varPackedTex.xy;
-float param_1=(*sc_set2.UserUniforms).screenTextureBias;
-l9_0=screenTextureSampleViewBias(param,param_1,(*sc_set2.UserUniforms),sc_set2.screenTexture,sc_set2.screenTextureSmpSC,sc_fragIn.sc_sysIn,sc_set0,sc_set1);
-}
-#else
-{
-float2 param_2=sc_fragIn.sc_sysIn.varPackedTex.xy;
-float param_3=(*sc_set2.UserUniforms).screenTextureLevel;
-l9_0=screenTextureSampleViewLevel(param_2,param_3,(*sc_set2.UserUniforms),sc_set2.screenTexture,sc_set2.screenTextureSmpSC,sc_fragIn.sc_sysIn,sc_set0,sc_set1);
-}
-#endif
-float4 screenTextureColor=l9_0;
+float param_1=(*sc_set2.UserUniforms).screenTextureLevel;
+float4 screenTextureColor=screenTextureSampleViewLevel(param,param_1,(*sc_set2.UserUniforms),sc_set2.screenTexture,sc_set2.screenTextureSmpSC,sc_fragIn.sc_sysIn,sc_set0,sc_set1);
 #if (SWAP_R_B_CHANNELS)
 {
-float4 param_4=screenTextureColor.zyxw;
-sc_writeFragData0(param_4,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
+float4 param_2=screenTextureColor.zyxw;
+sc_writeFragData0(param_2,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
 }
 #else
 {
 #if (GRAYSCALE_AS_ALPHA)
 {
-float4 param_5=float4(1.0,1.0,1.0,screenTextureColor.x);
-sc_writeFragData0(param_5,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
+float4 param_3=float4(1.0,1.0,1.0,screenTextureColor.x);
+sc_writeFragData0(param_3,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
 }
 #else
 {
-float4 param_6=screenTextureColor;
-sc_writeFragData0(param_6,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
+float4 param_4=screenTextureColor;
+sc_writeFragData0(param_4,sc_fragIn.sc_sysIn,sc_fragOut.sc_sysOut,sc_set0,sc_set1);
 }
 #endif
 }

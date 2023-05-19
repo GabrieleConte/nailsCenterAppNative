@@ -1,14 +1,14 @@
 PODS:
-  - SCSDKCameraKit (1.21.1)
-  - SCSDKCameraKitReferenceSwiftUI (1.21.1):
-    - SCSDKCameraKitReferenceUI (~> 1.21.1)
-  - SCSDKCameraKitReferenceUI (1.21.1):
-    - SCSDKCameraKit (~> 1.21.1)
+  - SCSDKCameraKit (1.22.0)
+  - SCSDKCameraKitReferenceSwiftUI (1.22.0):
+    - SCSDKCameraKitReferenceUI (~> 1.22.0)
+  - SCSDKCameraKitReferenceUI (1.22.0):
+    - SCSDKCameraKit (~> 1.22.0)
 
 DEPENDENCIES:
-  - SCSDKCameraKit (= 1.21.1)
-  - SCSDKCameraKitReferenceSwiftUI (= 1.21.1)
-  - SCSDKCameraKitReferenceUI (= 1.21.1)
+  - SCSDKCameraKit (= 1.22.0)
+  - SCSDKCameraKitReferenceSwiftUI (= 1.22.0)
+  - SCSDKCameraKitReferenceUI (= 1.22.0)
 
 SPEC REPOS:
   trunk:
@@ -17,10 +17,10 @@ SPEC REPOS:
     - SCSDKCameraKitReferenceUI
 
 SPEC CHECKSUMS:
-  SCSDKCameraKit: f127d227604b947555779cd0557be9157ba47f5d
-  SCSDKCameraKitReferenceSwiftUI: c83546e30874ce903b34c5d580b8b57d4deadf9b
-  SCSDKCameraKitReferenceUI: f9ea379be3cf784e05c7d341fd766f012f245168
+  SCSDKCameraKit: 0829148e5c3486161b4956a022ee4cf9ebed9a90
+  SCSDKCameraKitReferenceSwiftUI: 1b2be4d600a1f63c22da46ffd8b8bd6c80fa99de
+  SCSDKCameraKitReferenceUI: 173317f097798192a6b33c0efc3b153db19ae618
 
-PODFILE CHECKSUM: 4f0f1d1d747e96932302165a84ca12c801c7b09d
+PODFILE CHECKSUM: bb4290ee7773d1ac82df49e51159a61d2c5c4c62
 
 COCOAPODS: 1.12.1

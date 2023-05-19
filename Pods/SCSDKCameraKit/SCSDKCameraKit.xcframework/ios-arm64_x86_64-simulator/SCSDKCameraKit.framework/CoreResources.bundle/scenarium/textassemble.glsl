@@ -2,6 +2,8 @@
 // Copyright (c) 2017 Snap Inc.
 //-----------------------------------------------------------------------
 
+#include <required.glsl>
+
 uniform sampler2D inputTexture;
 uniform vec4 baseColor;
 

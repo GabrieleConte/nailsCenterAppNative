@@ -14,12 +14,6 @@ namespace SNAP_VS {
 
 namespace SNAP_FS {
 #if SC_RT_RECEIVER_MODE
-#ifndef RAY_SIEVER
-#define RAY_SIEVER 0
-#elif RAY_SIEVER==1
-#undef RAY_SIEVER
-#define RAY_SIEVER 1
-#endif
 struct sc_SysOut
 {
 uint4 position_and_mask [[color(0)]];
@@ -55,16 +49,6 @@ return ret;
 }
 void sc_WriteReceiverData(thread const float3& positionWS,thread const float3& normalWS,thread const float& roughness,thread sc_SysIn& sc_sysIn,thread sc_SysOut& sc_sysOut,const constant sc_Set0& sc_set0,const constant sc_Set1& sc_set1)
 {
-#if (RAY_SIEVER)
-{
-int2 p=int2(sc_GetGlFragCoord(sc_sysIn,sc_set0,sc_set1).xy);
-int r=((2*p.x)+p.y)%5;
-if (r!=0)
-{
-discard_fragment();
-}
-}
-#endif
 uint3 l9_0=uint3((positionWS-(*sc_set0.LibraryUniforms).OriginNormalizationOffset)*(*sc_set0.LibraryUniforms).OriginNormalizationScale);
 sc_sysOut.position_and_mask=uint4(l9_0.x,l9_0.y,l9_0.z,sc_sysOut.position_and_mask.w);
 sc_sysOut.position_and_mask.w=uint((*sc_set0.LibraryUniforms).receiver_mask);

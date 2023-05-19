@@ -53,16 +53,17 @@ public class ImagePreviewViewController: PreviewViewController {
 
     // MARK: Action Overrides
 
-    override func openSnapchat() {
+    override public func openSnapchatPressed(_ sender: UIButton) {
         snapchatDelegate?.cameraKitViewController(self, openSnapchat: .photo(image))
     }
 
-    override func sharePreview() {
+    override public func sharePreviewPressed(_ sender: UIButton) {
         let viewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        viewController.popoverPresentationController?.sourceView = sender
         present(viewController, animated: true, completion: nil)
     }
 
-    override func savePreview() {
+    override public func savePreviewPressed(_ sender: UIButton) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: self.image)
         }) { saved, error in

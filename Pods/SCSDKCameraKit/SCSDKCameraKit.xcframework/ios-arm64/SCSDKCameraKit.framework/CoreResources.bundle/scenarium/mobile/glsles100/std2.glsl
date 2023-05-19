@@ -181,18 +181,6 @@
 #undef sc_ShaderComplexityAnalyzer
 #define sc_ShaderComplexityAnalyzer 1
 #endif
-#ifndef sc_ProxyMode
-#define sc_ProxyMode 0
-#elif sc_ProxyMode==1
-#undef sc_ProxyMode
-#define sc_ProxyMode 1
-#endif
-#ifndef sc_NoEarlyZ
-#define sc_NoEarlyZ 0
-#elif sc_NoEarlyZ==1
-#undef sc_NoEarlyZ
-#define sc_NoEarlyZ 1
-#endif
 #ifndef sc_DepthOnly
 #define sc_DepthOnly 0
 #elif sc_DepthOnly==1
@@ -419,12 +407,6 @@ vec2 clipPlanes;
 #ifndef sc_SkinBonesCount
 #define sc_SkinBonesCount 0
 #endif
-#ifndef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 0
-#elif sc_ReceiveRayTracedReflections==1
-#undef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 1
-#endif
 struct sc_AmbientLightCompatibility_t
 {
 vec3 color;
@@ -434,7 +416,9 @@ uniform vec4 sc_EnvmapSpecularDims;
 uniform vec4 sc_StrandDataMapTextureDims;
 uniform vec4 sc_ScreenTextureDims;
 uniform vec4 sc_ShadowTextureDims;
+uniform bool receivesRayTracedReflections;
 uniform vec4 sc_RayTracedReflectionTextureDims;
+uniform bool isProxyMode;
 uniform sc_PointLight_t sc_PointLights[(sc_PointLightsCount+1)];
 uniform sc_DirectionalLight_t sc_DirectionalLights[(sc_DirectionalLightsCount+1)];
 uniform sc_AmbientLight_t sc_AmbientLights[(sc_AmbientLightsCount+1)];
@@ -971,6 +955,10 @@ vec4 sc_ShadowTextureSampleView(vec2 uv)
 {
 return sc_ShadowTextureSampleViewIndex(uv,sc_ShadowTextureGetStereoViewIndex());
 }
+bool ReceivesRayTracedReflections()
+{
+return receivesRayTracedReflections;
+}
 vec2 sc_RayTracedReflectionTextureGetDims2D()
 {
 return sc_RayTracedReflectionTextureDims.xy;
@@ -1050,6 +1038,10 @@ return sc_RayTracedReflectionTextureSampleViewIndexBias(uv,viewIndex,0.0);
 vec4 sc_RayTracedReflectionTextureSampleView(vec2 uv)
 {
 return sc_RayTracedReflectionTextureSampleViewIndex(uv,sc_RayTracedReflectionTextureGetStereoViewIndex());
+}
+bool IsProxyMode()
+{
+return isProxyMode;
 }
 void sc_SetGlPosition(vec4 pos)
 {
@@ -1208,18 +1200,6 @@ return gl_VertexID;
 #elif sc_ShaderComplexityAnalyzer==1
 #undef sc_ShaderComplexityAnalyzer
 #define sc_ShaderComplexityAnalyzer 1
-#endif
-#ifndef sc_ProxyMode
-#define sc_ProxyMode 0
-#elif sc_ProxyMode==1
-#undef sc_ProxyMode
-#define sc_ProxyMode 1
-#endif
-#ifndef sc_NoEarlyZ
-#define sc_NoEarlyZ 0
-#elif sc_NoEarlyZ==1
-#undef sc_NoEarlyZ
-#define sc_NoEarlyZ 1
 #endif
 #ifndef sc_DepthOnly
 #define sc_DepthOnly 0
@@ -1447,12 +1427,6 @@ vec2 clipPlanes;
 #ifndef sc_SkinBonesCount
 #define sc_SkinBonesCount 0
 #endif
-#ifndef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 0
-#elif sc_ReceiveRayTracedReflections==1
-#undef sc_ReceiveRayTracedReflections
-#define sc_ReceiveRayTracedReflections 1
-#endif
 struct sc_AmbientLightCompatibility_t
 {
 vec3 color;
@@ -1462,7 +1436,9 @@ uniform vec4 sc_EnvmapSpecularDims;
 uniform vec4 sc_StrandDataMapTextureDims;
 uniform vec4 sc_ScreenTextureDims;
 uniform vec4 sc_ShadowTextureDims;
+uniform bool receivesRayTracedReflections;
 uniform vec4 sc_RayTracedReflectionTextureDims;
+uniform bool isProxyMode;
 uniform vec4 sc_WindowToViewportTransform;
 uniform sc_PointLight_t sc_PointLights[(sc_PointLightsCount+1)];
 uniform sc_DirectionalLight_t sc_DirectionalLights[(sc_DirectionalLightsCount+1)];
@@ -1901,6 +1877,10 @@ vec4 sc_ShadowTextureSampleView(vec2 uv)
 {
 return sc_ShadowTextureSampleViewIndex(uv,sc_ShadowTextureGetStereoViewIndex());
 }
+bool ReceivesRayTracedReflections()
+{
+return receivesRayTracedReflections;
+}
 vec2 sc_RayTracedReflectionTextureGetDims2D()
 {
 return sc_RayTracedReflectionTextureDims.xy;
@@ -1964,6 +1944,10 @@ return sc_RayTracedReflectionTextureSampleViewIndexBias(uv,viewIndex,0.0);
 vec4 sc_RayTracedReflectionTextureSampleView(vec2 uv)
 {
 return sc_RayTracedReflectionTextureSampleViewIndex(uv,sc_RayTracedReflectionTextureGetStereoViewIndex());
+}
+bool IsProxyMode()
+{
+return isProxyMode;
 }
 vec4 sc_GetGlFragCoord()
 {

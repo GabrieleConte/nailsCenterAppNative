@@ -11,9 +11,6 @@ NS_SWIFT_NAME(SessionConfig)
 /// token or overwrite the ones that are passed into `Info.plist`.
 @interface SCCameraKitSessionConfig : NSObject
 
-/// applicationID/clientID that is found in the dev portal
-@property (nonatomic, copy, readonly) NSString *applicationId;
-
 /// API token that is found in the dev portal
 @property (nonatomic, copy, readonly) NSString *apiToken;
 
@@ -21,12 +18,39 @@ NS_SWIFT_NAME(SessionConfig)
 /// @warning USE ONLY AS DIRECTED BY SNAP SUPPORT.
 @property (nonatomic, strong, readonly) NSDictionary<NSString *, id> *additionalConfigurationAttributes;
 
+/// Designated init to pass in apiToken
+/// @param apiToken api token that is found in the dev portal
+/// @note as well as overwrite the apiToken passed into `Info.plist` with the key `SCCameraKitAPIToken`
+- (instancetype)initWithApiToken:(NSString *)apiToken NS_DESIGNATED_INITIALIZER;
+
+/// Init to pass in apiToken
+/// @param apiToken api token that is found in the dev portal
+/// @param additionalConfigurationAttributes additional configuration
+/// @note as well as overwrite the apiToken passed into `Info.plist` with the key `SCCameraKitAPIToken`
+/// @warning USE ONLY AS DIRECTED BY SNAP SUPPORT.
+- (instancetype)initWithApiToken:(NSString *)apiToken
+    additionalConfigurationAttributes:(nullable NSDictionary<NSString *, id> *)additionalConfigurationAttributes;
+
+/// Use designated init to pass in require applicationID and apiToken
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+// Deprecated
+
+/// applicationID/clientID that is found in the dev portal
+@property (nonatomic, copy, readonly) NSString *applicationId
+    __attribute__((deprecated("Application ID-based authentication is no longer supported. Use apiToken instead.")));
+
 /// Designated init to pass in applicationID and apiToken
 /// @param applicationID applicationID/clientID that is found in the dev portal
 /// @param apiToken api token that is found in the dev portal
 /// @note this will override the applicationID passed into `Info.plist` with the key `SCCameraKitClientID`
 /// @note as well as overwrite the apiToken passed into `Info.plist` with the key `SCCameraKitAPIToken`
-- (instancetype)initWithApplicationID:(NSString *)applicationID apiToken:(NSString *)apiToken NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithApplicationID:(NSString *)applicationID
+                             apiToken:(NSString *)apiToken
+    __attribute__((
+        deprecated("Application ID-based authentication is no longer supported. Use initWithApiToken: instead.",
+                   "initWithApiToken:")));
 
 /// Init to pass in applicationID and apiToken
 /// @param applicationID applicationID/clientID that is found in the dev portal
@@ -37,11 +61,10 @@ NS_SWIFT_NAME(SessionConfig)
 /// @warning USE ONLY AS DIRECTED BY SNAP SUPPORT.
 - (instancetype)initWithApplicationID:(NSString *)applicationID
                              apiToken:(NSString *)apiToken
-    additionalConfigurationAttributes:(nullable NSDictionary<NSString *, id> *)additionalConfigurationAttributes;
-
-/// Use designated init to pass in require applicationID and apiToken
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+    additionalConfigurationAttributes:(nullable NSDictionary<NSString *, id> *)additionalConfigurationAttributes
+    __attribute__((deprecated("Application ID-based authentication is no longer supported. Use "
+                              "initWithApiToken:additionalConfigurationAttributes: instead.",
+                              "initWithApiToken:additionalConfigurationAttributes:")));
 
 @end
 
